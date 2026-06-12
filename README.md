@@ -5,7 +5,7 @@ This is a ToDo app.
 - Add tasks
 - Delete tasks
 
-##used hooks;
+## used hooks;
 useEffect,useState
 
 ![alt text](image-1.png)
