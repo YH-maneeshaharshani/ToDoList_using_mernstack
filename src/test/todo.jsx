@@ -42,7 +42,7 @@ const deleteTodo=(index)=>{
 }
 
 const  startEdit = (index) =>{
-  setEditIndex();
+  setEditIndex(index);        
   setEditText(todos[index].text);
 }
 
@@ -58,10 +58,12 @@ const saveEdit =() =>{
 
 
 return(
-<div className="min-h-screen bg-gray-200 flex items-center justify-center p-6">
+<div className="min-h-screen bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center p-6">
 {/*Designn inner card component*/}
- <div className="bg-white p-6 w-full rounded-2xl">
+ <div className="bg-white p-6 w-1/2 rounded-2xl">
     <h1 className="text-2xl font-semibold text-center text-slate-800 mb-6">My To Do List</h1>
+
+
  {/*Add new todos*/}
 
  <div className="flex gap-2 mb-4">
@@ -71,7 +73,7 @@ return(
  placeholder="Enter a new task ......"
  value={newTask}
  onChange={(e) => setNewTask(e.target.value)}
- className="flex-1 border runded-xl px-3 py-2  focus:outline-none focus:ring-2 focus:ring-slate-400"
+ className="flex-1 border rounded-xl px-3 py-2  focus:outline-none focus:ring-2 focus:ring-slate-400"
 
 
  />
@@ -90,7 +92,7 @@ return(
   {todos.map((todo,index)=>(
     <li
     key={index}
-     className="flex items-center justify-between bg-gray-50 p-3 rounded-x shadow-sm hover:shadow-md transition">
+     className="flex items-center justify-between bg-gray-50 p-3 rounded-xl shadow-sm hover:shadow-md transition">
 
     {editIndex === index ? (<div className="flex w-full gap-2">
       <input
@@ -100,25 +102,32 @@ return(
       className="flex-1 border rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-400"
       />
 
-    
-      <buttoon
+     {/* Save button for editing */}
+      <button
       onClick={saveEdit}
-      className="bg-green-500 text-white px-4 py-2 rounded-xl hover:bg-green-400"
-      
-      >
-
-       save
-
-      </buttoon>
-    </div>):(<>
+      className="bg-green-500 text-white px-4 py-2 rounded-xl hover:bg-green-400">save</button>
+    </div>):
+    (<>
     
     <span
       onClick={() => toggleDone(index)}
-      className={`flex 1 cursor-pointer ${todo.done ? " text-gray-500" : ""}`}
+      className={`flex-1 cursor-pointer ${todo.done ? " text-gray-500 line-through" : ""}`}
       >
         {todo.text}
     </span>
-    <div className=""></div>
+
+     {/* Edit and delete buttons */}
+    <div className="flex gap-2">
+
+      <button onClick={()=>startEdit(index)}  className="text-blue-500 hover-text-blue-800">
+        edit
+      </button>
+
+      <button onClick={()=>deleteTodo(index)}  className="text-red-500 hover-text-red-800">
+        Delete
+      </button>
+
+    </div>
     
     </>)}
 
